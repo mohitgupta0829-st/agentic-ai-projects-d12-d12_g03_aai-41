@@ -1,135 +1,255 @@
+# Autonomous Retail Researcher Agent
 
-Autonomous Retail Researcher Agent
-Overview
+## Overview
 
-    The Autonomous Retail Researcher Agent is an AI-powered system built using Agentic AI and multi-agent architecture to automate retail research tasks.
+The Autonomous Retail Researcher Agent is an AI-based system designed to automate retail research using a multi-agent architecture. The system combines Agentic AI concepts with Retrieval-Augmented Generation (RAG) to perform intelligent data collection, analysis, and summarization.
 
-    It leverages Large Language Models (LLMs), CrewAI, and LangChain to collect, analyze, and summarize real-time retail data from multiple online sources — eliminating the need for manual research.
+It enables users to input queries in natural language and receive structured insights generated from real-time data sources and stored knowledge.
 
-Problem Statement
+---
 
-    Retail research involves:
+## Problem Statement
 
-      Monitoring market trends
-      Analyzing competitors
-      Studying product demand
-      Gathering insights from multiple sources
+Retail research involves analyzing large volumes of data such as market trends, product demand, and competitor activity. Traditional approaches are manual, time-consuming, and inefficient.
 
- Objectives
+Existing systems often rely on keyword-based search, which fails to capture the intent behind queries and leads to incomplete or irrelevant results.
 
-    Build an autonomous research system
-    Implement multi-agent collaboration using CrewAI
-    Automate data collection, analysis, and reporting
-    Enable natural language query processing
-    Store results in a knowledge repository
-    Improve research speed and decision-making
+This project aims to solve these challenges by building an intelligent system capable of understanding queries, retrieving relevant information, and generating meaningful insights automatically.
 
-Key Features
+---
 
-    Autonomous retail research agent
-    Multi-agent system (CrewAI)
-    Real-time web data retrieval
-    Natural language query interface
-    Automated report generation
-    LLM-based summarization
-    Persistent knowledge storage
-    Scalable and modular architecture
-    System Architecture
-    
-    User Query → Main Agent → Research Agent → Analysis Agent
-          → Summary Agent → Storage Agent → Final Output
+## Objectives
 
-Workflow
+- Develop an autonomous retail research system
+- Implement multi-agent collaboration
+- Automate data collection, analysis, and summarization
+- Enable natural language interaction
+- Store and reuse research outputs
+- Improve efficiency and decision-making
 
-    User submits query
-    Main agent assigns tasks
-    Research agent fetches web data
-    Analysis agent filters information
-    Summary agent generates insights using LLM
-    Storage agent saves report
+---
 
- The workflow diagram on page 7 visually shows this multi-agent pipeline and how agents collaborate step-by-step.
+## Key Features
 
-Tech Stack
+- Multi-agent architecture for task distribution
+- Automated research workflow
+- Real-time data processing
+- Natural language query interface
+- LLM-based summarization
+- Retrieval-Augmented Generation (RAG)
+- Persistent storage using vector database
+- Modular and scalable backend design
 
-    Component	Technology
-    Programming	Python
-    AI Framework	LangChain
-    Multi-Agent	CrewAI
-    LLM	LLM API
-    Data Source	Web Search Tools
-    Storage	Text-based Repository
-    Frontend	HTML, CSS, JavaScript
-    IDE	VS Code
-    Version Control	Git, GitHub
+---
 
-Installation & Setup
+## System Architecture
 
-    Clone Repository
+The system follows a pipeline-based multi-agent structure:
 
-     git clone <repository-url>
-     cd autonomous-retail-agent
-   
-    Create Virtual Environment
+User Query → Orchestrator → Research Agent → Analysis Agent → Summary Agent → Storage → Output
 
-     python -m venv venv
-     source venv/bin/activate   # Linux/Mac
-     venv\Scripts\activate      # Windows
-  
-    Install Dependencies
-     pip install -r requirements.txt
+Each component performs a specific task, ensuring separation of concerns and scalability.
 
-    Run Application
-     python main.py
+---
 
-Output & Results
-     
-    Generates structured research reports
-    Includes insights like:
-    Market trends
-    Stock performance
-    Product demand
-    Competitor analysis
-    Query input field
-    Research button
-    Structured output panel displaying insights
+## Backend Components
 
-Key Outcomes
-    
-    Fully automated retail research workflow
-    Multi-agent collaboration implemented
-    Real-time data retrieval capability
-    Structured and readable report generation
-    Reduced manual effort and time
-    Scalable and modular AI system
-Limitations
-    
-    Dependent on internet connectivity
-    Accuracy depends on data sources
-    No multimedia data processing
-    Limited enterprise-level scalability
-Future Enhancements
-    
-    Cloud deployment (AWS + Docker)
-    Database integration (MongoDB/MySQL)
-    Real-time dashboards & visualizations
-    Voice-based interaction
-    Multi-domain expansion (finance, healthcare)
-    Advanced agent collaboration & optimization
+The backend is implemented using Python and consists of the following key modules:
 
-Contributors
-    
-    Aditya Agrawal
-    Atharv Shukla
-    Mohit Gupta 
-    Malya Singh
-    Verma Nikhil Kumar Vipin Kumar
+- `main.py`  
+  Entry point of the application. Initializes the system and API.
 
-Institution: Medicaps University
-Course: Agentic AI – Datagami Skill Based Course
-Project Number: AAI-41
-Group: D03G12
+- `agents.py`  
+  Defines the multi-agent workflow and coordination logic.
 
-Conclusion
+- `rag.py`  
+  Implements the Retrieval-Augmented Generation pipeline.
 
-    This project demonstrates the real-world application of Agentic AI, showcasing how autonomous multi-agent systems can efficiently handle complex research workflows. It significantly improves productivity, accuracy, and decision-making in the retail domain.
+- `memory.py`  
+  Handles storage and retrieval of past interactions.
+
+- `database.py`  
+  Manages local data storage.
+
+- `tools.py`  
+  Contains helper utilities for data processing and external integrations.
+
+- `config.py`  
+  Stores configuration and environment settings.
+
+---
+
+## Data & Storage
+
+- Vector storage using FAISS (`faiss_index.faiss`, `faiss_index.meta.pkl`)
+- Local database (`retail_researcher.db`)
+- Document storage in `backend/data/`
+
+---
+
+## Frontend
+
+The frontend is a lightweight interface built using:
+
+- HTML (`index.html`)
+- CSS (`style.css`)
+- JavaScript (`script.js`)
+
+It communicates with the backend API to:
+- Accept user queries
+- Trigger research workflows
+- Display structured results
+
+---
+
+## DevOps & Deployment
+
+- Backend Dockerized using `backend/Dockerfile`
+- Frontend served via Nginx (`frontend/nginx.conf`)
+- Multi-container setup defined in `docker-compose.yml`
+
+---
+
+## Project Structure
+
+
+Agent/
+│
+├── backend/
+│ ├── data/
+│ ├── agents.py
+│ ├── config.py
+│ ├── database.py
+│ ├── main.py
+│ ├── memory.py
+│ ├── rag.py
+│ ├── tools.py
+│ ├── requirements.txt
+│ ├── requirements.docker.txt
+│ ├── Dockerfile
+│ ├── faiss_index.faiss
+│ ├── faiss_index.meta.pkl
+│ └── retail_researcher.db
+│
+├── frontend/
+│ ├── index.html
+│ ├── script.js
+│ ├── style.css
+│ ├── nginx.conf
+│ └── Dockerfile
+│
+├── docker-compose.yml
+├── README.md
+└── .gitignore
+
+
+---
+
+## Installation and Setup
+
+### Clone the repository
+
+
+git clone <repository-url>
+cd Agent
+
+
+### Create virtual environment
+
+
+python -m venv venv
+venv\Scripts\activate (Windows)
+source venv/bin/activate (Linux/Mac)
+
+
+### Install dependencies
+
+
+pip install -r backend/requirements.txt
+
+
+### Run backend
+
+
+cd backend
+python main.py
+
+
+### Run frontend
+
+Open `frontend/index.html` in browser  
+or use Docker setup.
+
+---
+
+## Running with Docker
+
+
+docker-compose up --build
+
+
+---
+
+## Output
+
+The system generates structured research outputs including:
+
+- Market trends
+- Product insights
+- Competitor analysis
+- Summary reports
+
+Results are displayed in a clean and readable format on the frontend interface.
+
+---
+
+## Key Outcomes
+
+- Automated retail research pipeline
+- Efficient multi-agent coordination
+- Integration of RAG with LLMs
+- Faster and more accurate insights
+- Reduced manual effort
+
+---
+
+## Limitations
+
+- Requires internet connectivity
+- Dependent on external data sources
+- Limited support for multimedia inputs
+- Not optimized for large-scale enterprise deployment
+
+---
+
+## Future Enhancements
+
+- Cloud deployment (AWS, Docker)
+- Database upgrades (MongoDB, PostgreSQL)
+- Real-time dashboards and analytics
+- Voice-based interaction
+- Multi-domain expansion
+- Improved agent orchestration
+
+---
+
+## Contributors
+
+Aditya Agrawal  
+Atharv Shukla  
+Mohit Gupta  
+Malya Singh  
+Nikhil Kumar Verma  
+
+Institution: Medicaps University  
+Course: Agentic AI – Datagami Skill Based Course  
+Project: AAI-41  
+Group: D03G12  
+
+---
+
+## Conclusion
+
+The project demonstrates how Agentic AI and multi-agent systems can be applied to automate complex retail research workflows. By integrating real-time data retrieval, intelligent processing, and structured output generation, the system improves efficiency and decision-making.
+
+The modular design ensures scalability and makes the system adaptable for future enhancements and broader applications
