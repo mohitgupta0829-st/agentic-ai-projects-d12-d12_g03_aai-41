@@ -114,7 +114,6 @@ It communicates with the backend API to:
 
 
 Agent/
-│
 ├── backend/
 │ ├── data/
 │ ├── agents.py
