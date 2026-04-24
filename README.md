@@ -110,7 +110,7 @@ It communicates with the backend API to:
 
 ---
 
-## ## Project Structure
+## Project Structure
 
 ```
 Agent/
