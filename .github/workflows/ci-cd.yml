@@ -1,0 +1,27 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Build Docker Images
+      run: docker-compose build
+
+    - name: Run Containers
+      run: docker-compose up -d
+
+    - name: Wait for services
+      run: sleep 10
+
+    - name: Check running containers
+      run: docker ps
