@@ -14,14 +14,20 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v4
 
+    # 🔹 STEP 3 (ADD HERE)
+    - name: Install Python Dependencies
+      run: |
+        pip install -r backend/requirements.txt
+
+    - name: Run basic backend check
+      run: |
+        cd backend
+        python main.py &
+        sleep 5
+
+    # 🔹 THEN YOUR DOCKER STEPS
     - name: Build Docker Images
       run: docker-compose build
 
     - name: Run Containers
       run: docker-compose up -d
-
-    - name: Wait for services
-      run: sleep 10
-
-    - name: Check running containers
-      run: docker ps
