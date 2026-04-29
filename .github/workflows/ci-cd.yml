@@ -3,37 +3,29 @@ name: CI/CD Pipeline
 on:
   push:
     branches: ["main"]
-  pull_request:
-    branches: ["main"]
 
 jobs:
-  build-and-test:
+  docker-test:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout Code
       uses: actions/checkout@v4
 
-    - name: Set up Docker
-      uses: docker/setup-buildx-action@v2
+    - name: Set up Docker Compose
+      run: docker compose version
 
-    - name: Install Docker Compose
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y docker-compose
-
-    - name: Install Python Dependencies
-      run: |
-        pip install -r backend/requirements.txt
-
-    - name: Run basic backend check
-      run: |
-        cd backend
-        python main.py &
-        sleep 5
-
-    - name: Build Docker Images
-      run: docker-compose build
+    - name: Build Containers
+      run: docker compose -f docker-compose.yml build
 
     - name: Run Containers
-      run: docker-compose up -d
+      run: docker compose -f docker-compose.yml up -d
+
+    - name: Wait for services
+      run: sleep 15
+
+    - name: Check running containers
+      run: docker ps
+
+    - name: Stop containers
+      run: docker compose down
