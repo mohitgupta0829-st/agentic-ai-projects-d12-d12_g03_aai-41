@@ -33,15 +33,3 @@ services:
 volumes:
   retail_data:
     driver: local
-
-    - name: Deploy to Server
-      uses: appleboy/ssh-action@v1.0.0
-      with:
-        host: ${{ secrets.SERVER_IP }}
-        username: ubuntu
-        key: ${{ secrets.SSH_KEY }}
-        script: |
-          cd project-folder
-          docker-compose pull
-          docker-compose down
-          docker-compose up -d
